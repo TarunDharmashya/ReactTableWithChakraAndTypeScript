@@ -1,24 +1,42 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import  Data from './MOCK_DATA.json'
+import { ChakraProvider } from '@chakra-ui/react';
+import { TableR } from './Table';
 
 function App() {
+const data = React.useMemo(()=> Data,[])
+
+  const columns = React.useMemo(
+    () => [
+            {
+              Header:'S.No',
+              accessor:'id',
+            },
+            {
+              Header: 'First Name',
+              accessor: 'first_name',
+            },
+            {
+              Header: 'Last Name',
+              accessor: 'last_name',
+            },     
+            {
+              Header: 'Email',
+              accessor: 'email',
+            },
+            {
+              Header: 'Gender',
+              accessor: 'gender',
+            },
+          ],[]
+  )
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ChakraProvider>
+      <TableR columns={columns} data={data} />
+      </ChakraProvider>
     </div>
   );
 }
